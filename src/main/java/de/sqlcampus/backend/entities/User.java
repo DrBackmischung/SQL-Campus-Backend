@@ -1,5 +1,9 @@
 package de.sqlcampus.backend.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 import org.springframework.lang.NonNull;
@@ -11,6 +15,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -41,6 +46,10 @@ public class User extends UuidIdentifiedEntity {
 	@NotFound(action=NotFoundAction.IGNORE)
 	@JoinColumn(name = "class_id", referencedColumnName = "id")
 	private Class dhbwClass;
+	
+	@OneToMany(mappedBy="userID")
+	@Cascade(org.hibernate.annotations.CascadeType.ALL)
+	private List<Course> courses = new ArrayList<>();
 
 	public User(String username, String firstname, String lastname, String email, String password, Class dhbwClass) {
 		super();
@@ -100,6 +109,22 @@ public class User extends UuidIdentifiedEntity {
 
 	public void setDhbwClass(Class dhbwClass) {
 		this.dhbwClass = dhbwClass;
+	}
+
+	public List<Course> getCourses() {
+		return courses;
+	}
+
+	public void setCourses(List<Course> courses) {
+		this.courses = courses;
+	}
+
+	public void addCourse(Course course) {
+		this.courses.add(course);
+	}
+
+	public void removeCourse(Course course) {
+		this.courses.remove(course);
 	}
 
 }
