@@ -27,5 +27,9 @@ replay_pid*
 /target/
 
 # IDE
-.settings
+/.settings/
 .project
+.DS_STORE
+
+# .env
+.env
