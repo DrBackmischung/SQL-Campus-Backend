@@ -2,48 +2,45 @@ package de.sqlcampus.backend.entities;
 
 import java.util.List;
 
-import org.springframework.lang.NonNull;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import de.sqlcampus.backend.misc.UuidIdentifiedEntity;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
 
-@Entity
-@Table(name="course")
+@Document
 public class Course extends UuidIdentifiedEntity {
-	
-	@Column
-	@NonNull
+
+    @Field("name")
 	private String name;
-	
-	@Column
-	@NonNull
+
+    @Field("description")
 	private String description;
-	
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable
+
+    @Field("tasks")
+    @DBRef(lazy = true)
 	private List<Task> tasks;
-	
-	@Column
-	@NonNull
+
+    @Field("users")
+    @DBRef(lazy = true)
+	private List<User> users;
+
+    @Field("level")
 	private int level;
-	
-	@Column
-	@NonNull
+
+    @Field("graded")
 	private boolean graded;
-	
-	@Column
-	@NonNull
+
+    @Field("mandatory")
 	private boolean mandatory;
 
-	public Course(String name, String description, int level, boolean graded, boolean mandatory) {
+	public Course(String name, String description, List<Task> tasks, List<User> users, int level, boolean graded,
+			boolean mandatory) {
 		super();
 		this.name = name;
 		this.description = description;
+		this.tasks = tasks;
+		this.users = users;
 		this.level = level;
 		this.graded = graded;
 		this.mandatory = mandatory;
@@ -75,6 +72,14 @@ public class Course extends UuidIdentifiedEntity {
 		this.tasks = tasks;
 	}
 
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+
 	public int getLevel() {
 		return level;
 	}
@@ -97,14 +102,6 @@ public class Course extends UuidIdentifiedEntity {
 
 	public void setMandatory(boolean mandatory) {
 		this.mandatory = mandatory;
-	}
-
-	public void addTask(Task task) {
-		this.tasks.add(task);
-	}
-
-	public void removeTask(Task task) {
-		this.tasks.remove(task);
 	}
 
 }

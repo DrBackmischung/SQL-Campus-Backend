@@ -2,31 +2,24 @@ package de.sqlcampus.backend.entities;
 
 import java.sql.Date;
 
-import org.springframework.lang.NonNull;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import de.sqlcampus.backend.misc.UuidIdentifiedEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
 
-@Entity
-@Table(name="class")
+@Document
 public class Class extends UuidIdentifiedEntity {
-	
-	@Column
-	@NonNull
+    
+    @Field("name")
 	private String name;
-	
-	@Column
-	@NonNull
+
+    @Field("school")
 	private String school;
-	
-	@Column
-	@NonNull
+    
+    @Field("start")
 	private Date start;
-	
-	@Column
-	@NonNull
+    
+    @Field("end")
 	private Date end;
 
 	public Class(String name, String school, Date start, Date end) {

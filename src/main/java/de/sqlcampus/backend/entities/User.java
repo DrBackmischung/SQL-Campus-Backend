@@ -1,64 +1,53 @@
 package de.sqlcampus.backend.entities;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.NotFound;
-import org.hibernate.annotations.NotFoundAction;
-import org.springframework.lang.NonNull;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import de.sqlcampus.backend.misc.UuidIdentifiedEntity;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
 
-@Entity
-@Table(name="user")
+@Document
 public class User extends UuidIdentifiedEntity {
-	
-	@Column
-	@NonNull
-	private String username;
-	
-	@Column
-	@NonNull
-	private String firstname;
-	
-	@Column
-	@NonNull
-	private String lastname;
-	
-	@Column
-	@NonNull
-	private String email;
-	
-	@Column
-	@NonNull
-	private String password;
-	
-	@ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.PERSIST)
-	@NotFound(action=NotFoundAction.IGNORE)
-	@JoinColumn(name = "class_id", referencedColumnName = "id")
-	private Class dhbwClass;
-	
-	@OneToMany(mappedBy="userID")
-	@Cascade(org.hibernate.annotations.CascadeType.ALL)
-	private List<Course> courses = new ArrayList<>();
 
-	public User(String username, String firstname, String lastname, String email, String password, Class dhbwClass) {
+    @Field("username")
+	private String username;
+
+    @Field("firstname")
+	private String firstname;
+
+    @Field("lastname")
+	private String lastname;
+
+    @Field("email")
+	private String email;
+
+    @Field("password")
+	private String password;
+    
+    @Field("active")
+    private boolean active;
+
+    @Field("dhbwClass")
+    @DBRef
+	private Class dhbwClass;
+
+    @Field("courses")
+    @DBRef(lazy = true)
+	private List<Course> courses;
+
+	public User(String username, String firstname, String lastname, String email, String password, boolean active,
+			Class dhbwClass, List<Course> courses) {
 		super();
 		this.username = username;
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.email = email;
 		this.password = password;
+		this.active = active;
 		this.dhbwClass = dhbwClass;
+		this.courses = courses;
 	}
 	
 	public User() {}
@@ -103,6 +92,14 @@ public class User extends UuidIdentifiedEntity {
 		this.password = password;
 	}
 
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
 	public Class getDhbwClass() {
 		return dhbwClass;
 	}
@@ -117,14 +114,6 @@ public class User extends UuidIdentifiedEntity {
 
 	public void setCourses(List<Course> courses) {
 		this.courses = courses;
-	}
-
-	public void addCourse(Course course) {
-		this.courses.add(course);
-	}
-
-	public void removeCourse(Course course) {
-		this.courses.remove(course);
 	}
 
 }

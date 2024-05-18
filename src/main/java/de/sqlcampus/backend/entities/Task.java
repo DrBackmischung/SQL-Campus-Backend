@@ -2,67 +2,63 @@ package de.sqlcampus.backend.entities;
 
 import java.util.List;
 
-import org.hibernate.annotations.Cascade;
-import org.springframework.lang.NonNull;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import de.sqlcampus.backend.misc.UuidIdentifiedEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
 
-@Entity
-@Table(name="task")
+@Document
 public abstract class Task extends UuidIdentifiedEntity {
-	
-	@Column
-	@NonNull
+
+    @Field("name")
 	private String name;
-	
-	@Column
-	@NonNull
+
+    @Field("description")
 	private String description;
-	
-	@Column
-	@NonNull
+
+    @Field("task")
 	private String task;
-	
-	@Column
-	@NonNull
+
+    @Field("level")
 	private String level;
-	
-	@Column
-	@NonNull
+
+    @Field("points")
 	private int points;
-	
-	@Column
+
+    @Field("autocompleteAllowed")
+	private boolean autocompleteAllowed;
+
+    @Field("sql")
 	private String sql;
-	
-	@Column
+
+    @Field("eml")
 	private String eml;
-	
-	@Column
+
+    @Field("abap")
 	private String abap;
-	
-	@Column
+
+    @Field("answer")
 	private String answer;
-	
-	@ManyToMany(mappedBy="tasks")
-	@Cascade(org.hibernate.annotations.CascadeType.ALL)
+
+    @Field("courses")
+    @DBRef(lazy = true)
 	private List<Course> courses;
 
-	public Task(String name, String description, String task, String level, int points, String sql, String eml,
-			String abap, String answer) {
+	public Task(String name, String description, String task, String level, int points, boolean autocompleteAllowed,
+			String sql, String eml, String abap, String answer, List<Course> courses) {
 		super();
 		this.name = name;
 		this.description = description;
 		this.task = task;
 		this.level = level;
 		this.points = points;
+		this.autocompleteAllowed = autocompleteAllowed;
 		this.sql = sql;
 		this.eml = eml;
 		this.abap = abap;
 		this.answer = answer;
+		this.courses = courses;
 	}
 	
 	public Task() {}
@@ -105,6 +101,14 @@ public abstract class Task extends UuidIdentifiedEntity {
 
 	public void setPoints(int points) {
 		this.points = points;
+	}
+
+	public boolean isAutocompleteAllowed() {
+		return autocompleteAllowed;
+	}
+
+	public void setAutocompleteAllowed(boolean autocompleteAllowed) {
+		this.autocompleteAllowed = autocompleteAllowed;
 	}
 
 	public String getSql() {
