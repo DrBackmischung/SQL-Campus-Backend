@@ -1,5 +1,6 @@
 package de.sqlcampus.backend.testdata.entities;
 
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -9,28 +10,20 @@ public class Item {
     @Field("name")
 	private String name;
 
+    @Field("description")
+	private String description;
+
     @Field("price")
 	private int price;
 
     @Field("brand")
-	private String brand;
+    @DBRef
+	private Brand brand;
 
-    @Field("name")
-	private String name;
+    @Field("vat")
+	private int vat;
 
-    @Field("name")
-	private String name;
-
-    @Field("name")
-	private String name;
-
-    @Field("name")
-	private String name;
-
-    @Field("name")
-	private String name;
-
-    @Field("name")
-	private String name;
+    @Field("purchasingPrice")
+	private String purchasingPrice;
 
 }
