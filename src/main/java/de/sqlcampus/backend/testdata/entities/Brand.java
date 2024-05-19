@@ -4,13 +4,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document
-public class Customer {
+public class Brand {
 
-    @Field("firstname")
-	private String firstname;
-
-    @Field("lastname")
-	private String lastname;
+    @Field("name")
+	private String name;
 
     @Field("address")
 	private String address;
@@ -27,10 +24,16 @@ public class Customer {
     @Field("email")
 	private String email;
 
-    @Field("passwordHash")
-	private String passwordHash;
+    @Field("website")
+	private String website;
 
-    @Field("points")
-	private int points;
+    @Field("mainContactName")
+	private String mainContactName;
+
+    @Field("mainContactPhone")
+	private String mainContactPhone;
+
+    @Field("mainContactEmail")
+	private String mainContactEmail;
 
 }
