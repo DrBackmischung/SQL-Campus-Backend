@@ -1,10 +1,10 @@
-package de.sqlcampus.backend.testdata.entities;
+package de.sqlcampus.backend.h2.entities;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document
-public class Brand {
+public class Supermarket {
 
     @Field("name")
 	private String name;
@@ -23,17 +23,5 @@ public class Brand {
 
     @Field("email")
 	private String email;
-
-    @Field("website")
-	private String website;
-
-    @Field("mainContactName")
-	private String mainContactName;
-
-    @Field("mainContactPhone")
-	private String mainContactPhone;
-
-    @Field("mainContactEmail")
-	private String mainContactEmail;
 
 }

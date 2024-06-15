@@ -1,4 +1,4 @@
-package de.sqlcampus.backend.testdata.entities;
+package de.sqlcampus.backend.h2.entities;
 
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;

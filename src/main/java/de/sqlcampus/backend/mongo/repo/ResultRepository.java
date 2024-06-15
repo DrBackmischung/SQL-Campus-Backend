@@ -1,4 +1,4 @@
-package de.sqlcampus.backend.repo;
+package de.sqlcampus.backend.mongo.repo;
 
 import java.util.UUID;
 

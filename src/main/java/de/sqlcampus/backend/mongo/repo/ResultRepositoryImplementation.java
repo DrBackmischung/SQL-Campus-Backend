@@ -1,4 +1,4 @@
-package de.sqlcampus.backend.repo;
+package de.sqlcampus.backend.mongo.repo;
 
 import org.bson.Document;
 import org.springframework.data.mongodb.core.MongoTemplate;

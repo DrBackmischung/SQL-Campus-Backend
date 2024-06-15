@@ -14,7 +14,7 @@ import com.mongodb.client.MongoClients;
 import de.sqlcampus.backend.misc.CustomMongoRepositoryImpl;
 
 @Configuration
-@EnableMongoRepositories(basePackages = "de.sqlcampus.backend.repo", repositoryBaseClass = CustomMongoRepositoryImpl.class)
+@EnableMongoRepositories(basePackages = "de.sqlcampus.backend.mongo.repo", repositoryBaseClass = CustomMongoRepositoryImpl.class)
 public class SimpleMongoConfig {
  
     @Bean
