@@ -3,6 +3,7 @@ package de.sqlcampus.backend.configuration;
 import org.bson.UuidRepresentation;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
@@ -15,6 +16,7 @@ import de.sqlcampus.backend.misc.CustomMongoRepositoryImpl;
 
 @Configuration
 @EnableMongoRepositories(basePackages = "de.sqlcampus.backend.mongo.repo", repositoryBaseClass = CustomMongoRepositoryImpl.class)
+@EnableJpaRepositories(basePackages = "de.sqlcampus.backend.h2.repo", repositoryBaseClass = CustomMongoRepositoryImpl.class)
 public class SimpleMongoConfig {
  
     @Bean
