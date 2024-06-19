@@ -31,4 +31,18 @@ public class Supermarket {
 	@Column
 	private String email;
 
+	public Supermarket(String id, String name, String address, String city, String zipcode, String phone,
+			String email) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.address = address;
+		this.city = city;
+		this.zipcode = zipcode;
+		this.phone = phone;
+		this.email = email;
+	}
+	
+	public Supermarket() {}
+
 }

@@ -40,4 +40,21 @@ public class Customer {
 	@Column
 	private int points;
 
+	public Customer(String id, String firstname, String lastname, String address, String city, String zipcode,
+			String phone, String email, String passwordHash, int points) {
+		super();
+		this.id = id;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.address = address;
+		this.city = city;
+		this.zipcode = zipcode;
+		this.phone = phone;
+		this.email = email;
+		this.passwordHash = passwordHash;
+		this.points = points;
+	}
+	
+	public Customer() {}
+
 }

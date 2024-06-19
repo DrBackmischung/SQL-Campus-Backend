@@ -52,4 +52,22 @@ public class Employee {
 	@JoinColumn(name = "supermarket", referencedColumnName = "id")
 	private Supermarket supermarket;
 
+	public Employee(String id, String firstname, String lastname, String address, String city, String zipcode,
+			String phone, String email, int salary, String role, Supermarket supermarket) {
+		super();
+		this.id = id;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.address = address;
+		this.city = city;
+		this.zipcode = zipcode;
+		this.phone = phone;
+		this.email = email;
+		this.salary = salary;
+		this.role = role;
+		this.supermarket = supermarket;
+	}
+	
+	public Employee() {}
+
 }
