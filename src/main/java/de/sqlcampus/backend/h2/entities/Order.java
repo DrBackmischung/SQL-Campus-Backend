@@ -4,42 +4,58 @@ import java.sql.Date;
 import java.sql.Time;
 import java.util.List;
 
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
-@Document
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="order")
 public class Order {
 
-    @Field("date")
+    @Id   
+	@Column
+    private String id;  
+
+	@Column
 	private Date date;
 
-    @Field("time")
+	@Column
 	private Time time;
 
-    @Field("discount")
+	@Column
 	private int discount;
 
-    @Field("supermarket")
-    @DBRef
+    @ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@NotFound(action=NotFoundAction.IGNORE)
+	@JoinColumn(name = "supermarket", referencedColumnName = "id")
 	private Supermarket supermarket;
 
-    @Field("customer")
-    @DBRef
+    @ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@NotFound(action=NotFoundAction.IGNORE)
+	@JoinColumn(name = "customer", referencedColumnName = "id")
 	private Customer customer;
 
-    @Field("employee")
-    @DBRef
+    @ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@NotFound(action=NotFoundAction.IGNORE)
+	@JoinColumn(name = "employee", referencedColumnName = "id")
 	private Employee employee;
 
-    @Field("items")
-    @DBRef
-	private List<OrderItem> items;
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "orders")
+	private List<Item> items;
 
-    @Field("total")
+	@Column
 	private int total;
 
-    @Field("totalVat")
+	@Column
 	private int totalVat;
 
 }

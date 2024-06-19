@@ -1,4 +1,4 @@
-package de.sqlcampus.backend.misc;
+package de.sqlcampus.backend.mongo.entities;
 
 import java.util.UUID;
 

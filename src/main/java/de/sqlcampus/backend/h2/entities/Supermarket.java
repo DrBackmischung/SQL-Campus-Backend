@@ -1,27 +1,34 @@
 package de.sqlcampus.backend.h2.entities;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
-@Document
+@Entity
+@Table(name="supermarket")
 public class Supermarket {
 
-    @Field("name")
+    @Id   
+	@Column
+    private String id;  
+
+	@Column
 	private String name;
 
-    @Field("address")
+	@Column
 	private String address;
 
-    @Field("city")
+	@Column
 	private String city;
 
-    @Field("zipcode")
+	@Column
 	private String zipcode;
 
-    @Field("phone")
+	@Column
 	private String phone;
 
-    @Field("email")
+	@Column
 	private String email;
 
 }

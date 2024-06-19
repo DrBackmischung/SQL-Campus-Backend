@@ -1,29 +1,56 @@
 package de.sqlcampus.backend.h2.entities;
 
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
+import java.util.List;
 
-@Document
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="item")
 public class Item {
 
-    @Field("name")
+    @Id   
+	@Column
+    private String id;  
+
+	@Column
 	private String name;
 
-    @Field("description")
+	@Column
 	private String description;
 
-    @Field("price")
+	@Column
 	private int price;
 
-    @Field("brand")
-    @DBRef
+    @ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@NotFound(action=NotFoundAction.IGNORE)
+	@JoinColumn(name = "brand", referencedColumnName = "id")
 	private Brand brand;
 
-    @Field("vat")
+	@Column
 	private int vat;
 
-    @Field("purchasingPrice")
+	@Column
 	private String purchasingPrice;
+
+	@ManyToMany()
+	@Cascade(org.hibernate.annotations.CascadeType.ALL)
+	@JoinTable(
+			  name = "order_items", 
+			  joinColumns = @JoinColumn(name = "item_id"), 
+			  inverseJoinColumns = @JoinColumn(name = "order_id"))
+	private List<Order> orders;
 
 }

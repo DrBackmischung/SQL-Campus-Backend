@@ -1,39 +1,46 @@
 package de.sqlcampus.backend.h2.entities;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
-@Document
+@Entity
+@Table(name="brand")
 public class Brand {
 
-    @Field("name")
+    @Id   
+	@Column(nullable = false, unique = true)
+    private String id;  
+    
+	@Column
 	private String name;
 
-    @Field("address")
+	@Column
 	private String address;
 
-    @Field("city")
+	@Column
 	private String city;
 
-    @Field("zipcode")
+	@Column
 	private String zipcode;
 
-    @Field("phone")
+	@Column
 	private String phone;
 
-    @Field("email")
+	@Column
 	private String email;
 
-    @Field("website")
+	@Column
 	private String website;
 
-    @Field("mainContactName")
+	@Column
 	private String mainContactName;
 
-    @Field("mainContactPhone")
+	@Column
 	private String mainContactPhone;
 
-    @Field("mainContactEmail")
+	@Column
 	private String mainContactEmail;
 
 }

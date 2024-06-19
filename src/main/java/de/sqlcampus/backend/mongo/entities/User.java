@@ -6,8 +6,6 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import de.sqlcampus.backend.misc.UuidIdentifiedEntity;
-
 @Document
 public class User extends UuidIdentifiedEntity {
 

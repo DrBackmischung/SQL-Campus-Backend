@@ -1,41 +1,55 @@
 package de.sqlcampus.backend.h2.entities;
 
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
-@Document
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="employee")
 public class Employee {
 
-    @Field("firstname")
+    @Id   
+	@Column
+    private String id;  
+
+	@Column
 	private String firstname;
 
-    @Field("lastname")
+	@Column
 	private String lastname;
 
-    @Field("address")
+	@Column
 	private String address;
 
-    @Field("city")
+	@Column
 	private String city;
 
-    @Field("zipcode")
+	@Column
 	private String zipcode;
 
-    @Field("phone")
+	@Column
 	private String phone;
 
-    @Field("email")
+	@Column
 	private String email;
 
-    @Field("salary")
+	@Column
 	private int salary;
 
-    @Field("role")
+	@Column
 	private String role;
 
-    @Field("salary")
-    @DBRef
+    @ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@NotFound(action=NotFoundAction.IGNORE)
+	@JoinColumn(name = "supermarket", referencedColumnName = "id")
 	private Supermarket supermarket;
 
 }
